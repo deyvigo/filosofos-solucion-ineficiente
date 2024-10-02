@@ -21,13 +21,11 @@ def filosofo(id):
   while True:
     # Pensando
     filosofos_estado[id] = "pensando"
-    print("Filósofo %d pensando" % id)
     time.sleep(2)
 
     # Intentando comer
     mutex.acquire()  # Proteger acceso a estados
     filosofos_estado[id] = "hambriento"
-    print("Filósofo %d hambriento" % id)
     mutex.release()
 
     # Intentar comer
@@ -36,7 +34,6 @@ def filosofo(id):
     # Comer
     mutex.acquire()  # Proteger acceso a estados
     filosofos_estado[id] = "comiendo"
-    print("Filósofo %d comiendo" % id)
     mutex.release()
 
     time.sleep(2)
@@ -44,11 +41,9 @@ def filosofo(id):
     # Estado después de comer
     mutex.acquire()  # Proteger acceso a estados
     filosofos_estado[id] = "pensando"
-    print("Filósofo %d ha terminado de comer y está pensando" % id)
     mutex.release()
 
     comedor.release()  # Liberar el comedor para el siguiente filósofo
-
 
 def iniciar_simulacion():
   for i in range(NUM_FILOSOFOS):
